@@ -1,5 +1,6 @@
 import handle_car_dataset
 import handle_congressional_dataset
+import handle_leaf_dataset
 import arvore_decisao
 import naive_bayes
 import matplotlib.pyplot as plt
@@ -43,22 +44,36 @@ if __name__ == '__main__':
       classificacoes_teste, 
       class_names=['democrat', 'republican'],
       feature_names=[
-        'handicapped-infants',
-        'water-project-cost-sharing',
+        'handicapped-infants', 'water-project-cost-sharing',
         'adoption-of-the-budget-resolution',
-        'physician-fee-freeze',
-        'el-salvador-aid',
+        'physician-fee-freeze', 'el-salvador-aid',
         'religious-groups-in-schools',
-        'anti-satellite-test-ban',
-        'aid-to-nicaraguan-contras',
-        'mx-missile',
-        'immigration',
-        'synfuels-corporation-cutback',
-        'education-spending',
-        'superfund-right-to-sue',
-        'crime',
-        'duty-free-exports',
-        'export-administration-act-south-africa'
+        'anti-satellite-test-ban', 'aid-to-nicaraguan-contras',
+        'mx-missile','immigration', 'synfuels-corporation-cutback',
+        'education-spending', 'superfund-right-to-sue','crime',
+        'duty-free-exports', 'export-administration-act-south-africa'
+      ]
+    )
+
+    resultados.append(a1)
+    resultados.append(a2)
+
+  if entrada == 3:
+    base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_leaf_dataset.get()
+    a1 = naive_bayes.exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste)
+    a2 = arvore_decisao.exec(
+      base_treino, 
+      base_teste, 
+      classificacoes_treino, 
+      classificacoes_teste, 
+      feature_names=[
+        'Specimen Number', 'Eccentricity',
+        'Aspect Ratio', 'Elongation',
+        'Solidity', 'Stochastic Convexity',
+        'Isoperimetric Factor', 'Maximal Indentation Depth',
+        'Lobedness', 'Average Intensity',
+        'Average Contrast', 'Smoothness',
+        'Third moment', 'Uniformity', 'Entropy',
       ]
     )
 
@@ -66,6 +81,7 @@ if __name__ == '__main__':
     resultados.append(a2)
 
   labels = ['Naive Bayes', 'Árvore de Decisão']
+  plt.gca().set_ylim([0, 1])
   plt.bar(labels, resultados, color='red')
   plt.xticks(labels)
   plt.xlabel('Algoritmo')
