@@ -27,6 +27,12 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, f
 
   print('===============================================================')
   print('Informações da Árvore de decisão')
+  print(f'Classes: {arvore_decisao.classes_}')
+  print(f'Número de classes: {arvore_decisao.n_classes_}')
+  print(f'Número de propriedades: {arvore_decisao.n_features_in_}')
+  print(f'Máx propriedades: {arvore_decisao.max_features_}')
+  print(f'Quantidade de folhas: {arvore_decisao.get_n_leaves()}')
+  print(f'Profundidade: {arvore_decisao.get_depth()}')
   print(f'Acurácia do modelo: {(acuracia*100):,.2f}% ({acuracia})')
   print(classification_report(classificacoes_teste, previsoes))
   print('===============================================================')
