@@ -7,6 +7,8 @@ import plot_bar
 
 if __name__ == '__main__':
 
+  labels_base = ['Car Evaluation', 'Congressional', 'Leaf']
+
   print('[1] - Car evaluation')
   print('[2] - Congressional')
   print('[3] - Leaf')
@@ -21,7 +23,13 @@ if __name__ == '__main__':
 
   if entrada == 1:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_car_dataset.get()
-    a1 = naive_bayes.exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste)
+    a1 = naive_bayes.exec(
+      base_treino, 
+      base_teste, 
+      classificacoes_treino, 
+      classificacoes_teste, 
+      title_base=labels_base[entrada-1]
+    )
     a2 = arvore_decisao.exec(
       base_treino, 
       base_teste, 
@@ -36,7 +44,13 @@ if __name__ == '__main__':
 
   if entrada == 2:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_congressional_dataset.get()
-    a1 = naive_bayes.exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste)
+    a1 = naive_bayes.exec(
+      base_treino, 
+      base_teste, 
+      classificacoes_treino, 
+      classificacoes_teste, 
+      title_base=labels_base[entrada-1]
+    )
     a2 = arvore_decisao.exec(
       base_treino, 
       base_teste, 
@@ -60,7 +74,13 @@ if __name__ == '__main__':
 
   if entrada == 3:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_leaf_dataset.get()
-    a1 = naive_bayes.exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, atr_binario=True)
+    a1 = naive_bayes.exec(
+      base_treino, 
+      base_teste, 
+      classificacoes_treino, 
+      classificacoes_teste,
+      title_base=labels_base[entrada-1]
+    )
     a2 = arvore_decisao.exec(
       base_treino, 
       base_teste, 
@@ -85,6 +105,6 @@ if __name__ == '__main__':
     y_label='Acurácia (%)',
     data=resultados,
     labels=['Naive Bayes', 'Árvore de Decisão'],
-    title='Comparação modelos de machine learning',
+    title=f'Comparação modelos de machine learning base {labels_base[entrada-1]}',
     porcentagem=True
   )

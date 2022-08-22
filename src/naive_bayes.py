@@ -3,7 +3,7 @@ import plot_bar
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, classification_report
 
-def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste):
+def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, title_base):
   warnings.filterwarnings('ignore')
 
   naive_bayes = GaussianNB()
@@ -16,7 +16,7 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste):
     y_label='Quantidade de registros',
     data=naive_bayes.class_count_,
     labels=naive_bayes.classes_,
-    title='Balanceamento da base de dados'
+    title=f'Balanceamento da base de dados {title_base}'
   )
 
   print('===================================================================================')
