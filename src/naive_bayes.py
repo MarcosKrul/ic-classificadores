@@ -1,7 +1,7 @@
 import warnings
+import plot_bar
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score, classification_report
-import matplotlib.pyplot as plt
 
 def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste):
   warnings.filterwarnings('ignore')
@@ -11,12 +11,13 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste):
   previsoes = naive_bayes.predict(base_teste)
   acuracia = accuracy_score(classificacoes_teste, previsoes)
 
-  plt.bar(naive_bayes.classes_, naive_bayes.class_count_, color='green')
-  plt.xticks(naive_bayes.classes_)
-  plt.xlabel('Classes')
-  plt.ylabel('Quantidade de registros')
-  plt.title('Balanceamento da base de dados')
-  plt.show()
+  plot_bar.exec(
+    x_label='Classes',
+    y_label='Quantidade de registros',
+    data=naive_bayes.class_count_,
+    labels=naive_bayes.classes_,
+    title='Balanceamento da base de dados'
+  )
 
   print('===================================================================================')
   print('Informações do Naive Bayes')

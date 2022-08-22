@@ -3,7 +3,7 @@ import handle_congressional_dataset
 import handle_leaf_dataset
 import arvore_decisao
 import naive_bayes
-import matplotlib.pyplot as plt
+import plot_bar
 
 if __name__ == '__main__':
 
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
   if entrada == 3:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_leaf_dataset.get()
-    a1 = naive_bayes.exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste)
+    a1 = naive_bayes.exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, atr_binario=True)
     a2 = arvore_decisao.exec(
       base_treino, 
       base_teste, 
@@ -80,11 +80,11 @@ if __name__ == '__main__':
     resultados.append(a1)
     resultados.append(a2)
 
-  labels = ['Naive Bayes', 'Árvore de Decisão']
-  plt.gca().set_ylim([0, 1])
-  plt.bar(labels, resultados, color='red')
-  plt.xticks(labels)
-  plt.xlabel('Algoritmo')
-  plt.ylabel('Acurácia (%)')
-  plt.title('Comparação modelos de machine learning')
-  plt.show()
+  plot_bar.exec(
+    x_label='Algoritmo',
+    y_label='Acurácia (%)',
+    data=resultados,
+    labels=['Naive Bayes', 'Árvore de Decisão'],
+    title='Comparação modelos de machine learning',
+    porcentagem=True
+  )
