@@ -1,7 +1,8 @@
 import warnings
 import plot_bar
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from prettytable import PrettyTable
 
 def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, title_base):
   warnings.filterwarnings('ignore')
@@ -19,6 +20,15 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
     title=f'Balanceamento da base de dados {title_base}'
   )
 
+  tabela = PrettyTable()
+  matriz = confusion_matrix(classificacoes_teste, previsoes)
+  tabela.title = 'Matriz de confusão'
+  tabela.field_names = ['', *naive_bayes.classes_]
+
+  for i in range(0, len(matriz)):
+    row = [naive_bayes.classes_[i]]
+    tabela.add_row([*row, *matriz[i]])
+
   print('===================================================================================')
   print('Informações do Naive Bayes')
   print(f'Quantidade de propriedades: {naive_bayes.n_features_in_}')
@@ -27,6 +37,7 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
   print(f'Percentual de registros por classe: {naive_bayes.class_prior_}')
   print(f'Acurácia do modelo: {(acuracia*100):,.2f}% ({acuracia})')
   print(classification_report(classificacoes_teste, previsoes))
+  print(tabela)
   print('===================================================================================')
 
   return acuracia
