@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 
-def get(mapear=True, test_size=0.7):
+def get(mapear=True, test_size=0.2):
   base = pd.read_csv(
     filepath_or_buffer=os.path.join(os.path.dirname(__file__), '../tmp/dataset/leaf/leaf.csv'), 
     header=None, 

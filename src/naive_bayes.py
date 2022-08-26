@@ -40,7 +40,7 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
       
       export_graphviz(
         modelo,
-        class_names=modelo.classes_,
+        class_names=[f'{x}' for x in modelo.classes_],
         filled=True, rounded=True, 
         out_file=os.path.join(os.path.dirname(__file__), f'../tmp/dot_files/tree_{dt_string}.dot')
       )
@@ -51,8 +51,9 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
     tabela.field_names = ['', *modelo.classes_]
 
     for i in range(0, len(matriz)):
-      row = [modelo.classes_[i]]
-      tabela.add_row([*row, *matriz[i]])
+      if len(modelo.classes_) == len(matriz[i]):
+        row = [modelo.classes_[i]]
+        tabela.add_row([*row, *matriz[i]])
     
     print('===================================================================================')
     print(nome)
