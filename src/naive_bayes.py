@@ -45,6 +45,7 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
         out_file=os.path.join(os.path.dirname(__file__), f'../tmp/dot_files/tree_{dt_string}.dot')
       )
     
+    print_tabela = True
     tabela = PrettyTable()
     matriz = confusion_matrix(classificacoes_teste, previsoes)
     tabela.title = 'Matriz de confusão'
@@ -54,13 +55,17 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
       if len(modelo.classes_) == len(matriz[i]):
         row = [modelo.classes_[i]]
         tabela.add_row([*row, *matriz[i]])
+      else:
+        print_tabela = False
+        break
     
     print('===================================================================================')
     print(nome)
     print(f'Quantidade de propriedades: {modelo.n_features_in_}')
     print(f'Acurácia do modelo: {(acuracia*100):,.2f}% ({acuracia})')
     print(classification_report(classificacoes_teste, previsoes))
-    print(tabela)
+    if print_tabela:
+      print(tabela)
     print('===================================================================================')
 
   plot_bar.exec(
