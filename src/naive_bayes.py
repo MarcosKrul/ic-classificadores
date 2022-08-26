@@ -25,6 +25,15 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
     acuracia = accuracy_score(classificacoes_teste, previsoes)
     resultados.append(acuracia)
 
+    if nome == 'Naive bayes Gaussian':
+      plot_bar.exec(
+        x_label='Classes',
+        y_label='Quantidade de registros',
+        data=modelo.class_count_,
+        labels=modelo.classes_,
+        title=f'Balanceamento da base de dados {title_base}'
+      )
+
     if nome == 'Árvore de Decisão':
       now = datetime.now()
       dt_string = now.strftime("%d_%m_%Y-%H_%M_%S")
