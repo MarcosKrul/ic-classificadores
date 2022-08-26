@@ -1,7 +1,7 @@
 import handle_car_dataset
 import handle_congressional_dataset
 import handle_leaf_dataset
-import naive_bayes
+import classificadores
 
 if __name__ == '__main__':
 
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
   if entrada == 1:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_car_dataset.get()
-    naive_bayes.exec(
+    classificadores.exec(
       base_treino, 
       base_teste, 
       classificacoes_treino, 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
   if entrada == 2:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_congressional_dataset.get()
-    naive_bayes.exec(
+    classificadores.exec(
       base_treino, 
       base_teste, 
       classificacoes_treino, 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
   if entrada == 3:
     base_treino, base_teste, classificacoes_treino, classificacoes_teste = handle_leaf_dataset.get(mapear=False)
-    naive_bayes.exec(
+    classificadores.exec(
       base_treino, 
       base_teste, 
       classificacoes_treino, 
