@@ -17,7 +17,7 @@ def exec(base_treino, base_teste, classificacoes_treino, classificacoes_teste, t
     y_label='Quantidade de registros',
     data=naive_bayes.class_count_,
     labels=naive_bayes.classes_,
-    title=f'Balanceamento da base de dados {title_base}'
+    title=f'Balanceamento da base de dados de treino {title_base}'
   )
 
   tabela = PrettyTable()
